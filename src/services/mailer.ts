@@ -38,10 +38,11 @@ export const sendEmail = async ({ email, emailType, userId }: SendEmailParams) =
         const actionText = emailType === "VERIFY" ? "verify your email" : "reset your password";
         const path = emailType === "VERIFY" ? "/auth/verifyemail" : "/auth/newpassword";
 
-        // Handle possible trailing slash in DOMAIN
-        const domain = process.env.DOMAIN?.endsWith("/")
-            ? process.env.DOMAIN.slice(0, -1)
-            : process.env.DOMAIN;
+        // Handle possible trailing slash in NEXT_PUBLIC_DOMAIN
+        const baseUrl = process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000";
+        const domain = baseUrl.endsWith("/")
+            ? baseUrl.slice(0, -1)
+            : baseUrl;
 
         const mailOption = {
             from: `"LinkNest" <${process.env.GMAIL}>`,
