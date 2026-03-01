@@ -91,19 +91,19 @@ export default function MyLinks() {
 
   return (
     <div className="page-root" style={{ minHeight: "100vh", padding: "24px", paddingBottom: "60px" }}>
-      <div style={{ maxWidth: "700px", margin: "0 auto", paddingTop: "96px" }}>
+      <div style={{ maxWidth: "700px", margin: "0 auto", paddingTop: "5px" }}>
 
         {/* Profile Card */}
         <div className="card fade-in" style={{ padding: "36px", textAlign: "center", marginBottom: "24px" }}>
           {/* Back link */}
           <div style={{ position: "absolute", top: "20px", left: "20px" }}>
-            <Link href="/auth/profile" style={{ fontSize: "13px", fontWeight: "600", color: "var(--accent)", textDecoration: "none", display: "flex", alignItems: "center", gap: "4px" }}>
+            <Link href="/auth/profile" style={{ fontSize: "13px", fontWeight: "600", color: "var(--accent)", textDecoration: "none", display: "flex", alignItems: "center", gap: "10px" }}>
               ← Dashboard
             </Link>
           </div>
 
           {/* Avatar */}
-          <div style={{ position: "relative", width: "100px", height: "100px", margin: "0 auto 20px" }}>
+          <div style={{ position: "relative", width: "100px", height: "100px", margin: "10px auto 20px" }}>
             <img
               src={user?.profileImage || "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"}
               alt="Profile"
@@ -133,14 +133,24 @@ export default function MyLinks() {
           <h2 style={{ fontSize: "20px", fontWeight: "800", color: "var(--text-primary)", marginBottom: "4px" }}>
             {user?.Username ? `@${user.Username}` : "Your Profile"}
           </h2>
-          <p style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "16px" }}>{user?.email}</p>
+          <p
+            style={{
+              fontSize: "13px",
+              color: "var(--text-muted)",
+              marginBottom: "16px",
+              wordBreak: "break-word",
+              overflowWrap: "anywhere",
+            }}
+          >
+            {user?.email}
+          </p>
 
           {/* URL bar */}
           <div style={{
             display: "flex", alignItems: "center", gap: "10px",
             background: "var(--surface-2)", border: "1.5px solid var(--border)",
             borderRadius: "12px", padding: "10px 14px",
-            fontSize: "14px", color: "var(--text-secondary)", fontWeight: "500",
+            fontSize: "12px", color: "var(--text-secondary)", fontWeight: "500",
           }}>
             <span style={{ flex: 1, textAlign: "left", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{profileUrl || "Loading…"}</span>
             {user && (

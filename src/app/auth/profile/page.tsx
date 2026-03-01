@@ -66,7 +66,7 @@ export default function Profile() {
 
   return (
     <div className="page-root" style={{ minHeight: "100vh", padding: "32px 24px 60px" }}>
-      <div style={{ maxWidth: "960px", margin: "0 auto", paddingTop: "80px" }}>
+      <div style={{ maxWidth: "960px", margin: "0 auto", paddingTop: "5px" }}>
         {/* Header */}
         <div className="fade-in" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "32px" }}>
           <div>
@@ -89,28 +89,94 @@ export default function Profile() {
           {/* Left */}
           <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             {/* Profile Details */}
-            <div className="card" style={{ padding: "32px" }}>
-              <div className="section-title">
-                <span className="accent-bar" style={{ background: "var(--accent)" }}></span>
-                Profile Details
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-                {[
-                  { label: "Username", value: `@${user?.Username}` },
-                  { label: "Account Status", value: user?.isVerified ? "✓ Verified" : "⏳ Pending", badge: true, verified: user?.isVerified },
-                  { label: "Email Address", value: user?.email, span: true },
-                ].map((item) => (
-                  <div key={item.label} className="card-sm" style={{ padding: "16px 20px", gridColumn: item.span ? "1 / -1" : "auto" }}>
-                    <p style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em", color: "var(--text-muted)", marginBottom: "6px" }}>{item.label}</p>
-                    {item.badge ? (
-                      <span className={item.verified ? "badge-success" : "badge-warning"} style={{ fontSize: "13px" }}>{item.value}</span>
-                    ) : (
-                      <p style={{ fontSize: "16px", fontWeight: "600", color: "var(--text-primary)", wordBreak: "break-all" }}>{item.value}</p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div
+  className="card"
+  style={{
+    padding: "clamp(20px, 4vw, 32px)",
+  }}
+>
+  <div className="section-title" style={{ marginBottom: "24px" }}>
+    <span
+      className="accent-bar"
+      style={{ background: "var(--accent)" }}
+    ></span>
+    Profile Details
+  </div>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+      gap: "18px",
+    }}
+  >
+    {[
+      { label: "Username", value: `@${user?.Username}` },
+      {
+        label: "Account Status",
+        value: user?.isVerified ? "✓ Verified" : "⏳ Pending",
+        badge: true,
+        verified: user?.isVerified,
+      },
+      {
+        label: "Email Address",
+        value: user?.email,
+        span: true,
+      },
+    ].map((item) => (
+      <div
+        key={item.label}
+        className="card-sm"
+        style={{
+          padding: "18px 20px",
+          borderRadius: "12px",
+          gridColumn: item.span ? "1 / -1" : "auto",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <p
+          style={{
+            fontSize: "11px",
+            fontWeight: "700",
+            textTransform: "uppercase",
+            letterSpacing: "0.06em",
+            color: "var(--text-muted)",
+            marginBottom: "8px",
+          }}
+        >
+          {item.label}
+        </p>
+
+        {item.badge ? (
+          <span
+            className={item.verified ? "badge-success" : "badge-warning"}
+            style={{
+              fontSize: "13px",
+              alignSelf: "flex-start",
+              padding: "6px 12px",
+              borderRadius: "999px",
+            }}
+          >
+            {item.value}
+          </span>
+        ) : (
+          <p
+            style={{
+              fontSize: "16px",
+              fontWeight: "600",
+              color: "var(--text-primary)",
+              wordBreak: "break-word",
+            }}
+          >
+            {item.value}
+          </p>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
 
             {/* Security */}
             <div className="card" style={{ padding: "32px" }}>

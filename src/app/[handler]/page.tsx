@@ -57,56 +57,206 @@ export default function PublicProfile() {
     );
   }
 
-  return (
-    <div className="page-root" style={{ minHeight: "100vh", padding: "40px 24px 80px" }}>
-      <div style={{ maxWidth: "560px", margin: "0 auto" }}>
-        {/* Profile Header */}
-        <div className="fade-in" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "36px", paddingTop: "24px" }}>
+ return (
+  <div
+    className="page-root"
+    style={{
+      minHeight: "100vh",
+      padding: "60px 20px 100px",
+      background: "var(--background)",
+    }}
+  >
+    <div
+      style={{
+        maxWidth: "560px",
+        margin: "0 auto",
+      }}
+    >
+      {/* Profile Header */}
+      <div
+        className="fade-in"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+          marginBottom: "48px",
+        }}
+      >
+        <div
+          style={{
+            padding: "6px",
+            borderRadius: "50%",
+            background: "var(--accent)",
+            display: "inline-block",
+            marginBottom: "18px",
+          }}
+        >
           <img
-            src={userData?.profileImage || "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"}
+            src={
+              userData?.profileImage ||
+              "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+            }
             alt={`${userData?.Username}'s profile`}
             className="avatar"
-            style={{ width: "96px", height: "96px", marginBottom: "16px" }}
+            style={{
+              width: "100px",
+              height: "100px",
+              borderRadius: "50%",
+              objectFit: "cover",
+              display: "block",
+            }}
           />
-          <h1 style={{ fontSize: "26px", fontWeight: "900", color: "var(--text-primary)", marginBottom: "4px" }}>
-            @{userData?.Username}
-          </h1>
-          <p style={{ fontSize: "14px", color: "var(--text-muted)", marginBottom: "0" }}>{userData?.email}</p>
         </div>
 
-        {/* Links */}
-        <div className="fade-in" style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          {links.length > 0 ? (
-            links.map((link: any) => (
-              <a
-                key={link._id}
-                href={link.accountLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link-card"
-                style={{ textDecoration: "none" }}
-              >
-                <div>
-                  <p style={{ fontWeight: "700", fontSize: "16px", color: "var(--text-primary)", marginBottom: "2px" }}>{link.platform}</p>
-                  <p style={{ fontSize: "12px", color: "var(--text-muted)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "300px" }}>{link.accountLink}</p>
-                </div>
-                <FaExternalLinkAlt size={14} style={{ color: "var(--text-muted)", flexShrink: 0 }} />
-              </a>
-            ))
-          ) : (
-            <div className="card" style={{ padding: "40px 24px", textAlign: "center" }}>
-              <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>This user hasn&apos;t added any links yet.</p>
-            </div>
-          )}
-        </div>
+        <h1
+          style={{
+            fontSize: "28px",
+            fontWeight: "900",
+            color: "var(--text-primary)",
+            marginBottom: "6px",
+            letterSpacing: "0.5px",
+          }}
+        >
+          @{userData?.Username}
+        </h1>
 
-        {/* Footer branding */}
-        <div style={{ textAlign: "center", marginTop: "48px", paddingTop: "24px", borderTop: "1px solid var(--border)" }}>
-          <Link href="/" style={{ fontSize: "13px", color: "var(--text-muted)", textDecoration: "none", fontWeight: "500" }}>
-            Powered by <strong style={{ color: "var(--accent)" }}>LinkNest</strong>
-          </Link>
-        </div>
+        <p
+          style={{
+            fontSize: "14px",
+            color: "var(--text-muted)",
+            marginBottom: "0",
+          }}
+        >
+          {userData?.email}
+        </p>
+      </div>
+
+      {/* Links */}
+      <div
+        className="fade-in"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+        }}
+      >
+        {links.length > 0 ? (
+          links.map((link: any) => (
+            <a
+              key={link._id}
+              href={link.accountLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-card"
+              style={{
+                textDecoration: "none",
+                padding: "18px 20px",
+                borderRadius: "14px",
+                border: "1px solid var(--border)",
+                background: "var(--card)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                transition: "all 0.25s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow =
+                  "0 8px 20px rgba(0,0,0,0.08)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0px)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <div style={{ overflow: "hidden" }}>
+                <p
+                  style={{
+                    fontWeight: "700",
+                    fontSize: "16px",
+                    color: "var(--text-primary)",
+                    marginBottom: "4px",
+                  }}
+                >
+                  {link.platform}
+                </p>
+
+                <p
+                  style={{
+                    fontSize: "12px",
+                    color: "var(--text-muted)",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {link.accountLink}
+                </p>
+              </div>
+
+              <FaExternalLinkAlt
+                size={14}
+                style={{
+                  color: "var(--text-muted)",
+                  flexShrink: 0,
+                }}
+              />
+            </a>
+          ))
+        ) : (
+          <div
+            className="card"
+            style={{
+              padding: "50px 24px",
+              textAlign: "center",
+              borderRadius: "14px",
+              border: "1px solid var(--border)",
+              background: "var(--card)",
+            }}
+          >
+            <p
+              style={{
+                color: "var(--text-muted)",
+                fontSize: "14px",
+              }}
+            >
+              This user hasn&apos;t added any links yet.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Footer Branding */}
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: "64px",
+          paddingTop: "28px",
+          borderTop: "1px solid var(--border)",
+        }}
+      >
+        <Link
+          href="/"
+          style={{
+            fontSize: "13px",
+            color: "var(--text-muted)",
+            textDecoration: "none",
+            fontWeight: "500",
+          }}
+        >
+          Powered by{" "}
+          <strong
+            style={{
+              color: "var(--accent)",
+              letterSpacing: "0.5px",
+            }}
+          >
+            LinkNest
+          </strong>
+        </Link>
       </div>
     </div>
-  );
+  </div>
+);
 }
